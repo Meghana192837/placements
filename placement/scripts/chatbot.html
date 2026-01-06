@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Custom Chatbot</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+  }
+
+  .chat-container {
+    max-width: 600px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  #messages {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .message {
+    margin: 5px 0;
+  }
+
+  .user {
+    text-align: right;
+    color: blue;
+  }
+
+  .bot {
+    text-align: left;
+    color: green;
+  }
+
+  #userInput {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  #sendBtn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="chat-container">
+  <h2>My Custom Chatbot</h2>
+  <div id="messages"></div>
+  <input type="text" id="userInput" placeholder="Ask a question..." />
+  <button id="sendBtn">Send</button>
+</div>
+
+<script>
+  // Predefined questions and answers
+  const qaPairs = [
+    {
+      question: "What courses do you offer?",
+      answer: "We offer courses in AI, Data Science, Web Development, and Cybersecurity."
+    },
+    {
+      question: "When are placements?",
+      answer: "Placements start from the 6th semester. Top companies include Infosys, TCS, Amazon, and Google."
+    },
+    {
+      question: "How to apply for internships?",
+      answer: "You can apply for internships through the Placement Portal under the internship section."
+    },
+    {
+      question: "How to upload my resume?",
+      answer: "Upload your resume on our platform to get AI-based skill evaluation and ranking."
+    }
+  ];
+
+  // Get elements
+  const messagesDiv = document.getElementById('messages');
+  const userInput = document.getElementById('userInput');
+  const sendBtn = document.getElementById('sendBtn');
+
+  // Function to add message to chat
+  function addMessage(text, className) {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'message ' + className;
+    msgDiv.innerText = text;
+    messagesDiv.appendChild(msgDiv);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  }
+
+  // Function to handle user input
+  function handleUserInput() {
+    const question = userInput.value.trim();
+    if (question === "") return;
+    addMessage("You: " + question, 'user');
+
+    // Find matching answer
+    const lowerQuestion = question.toLowerCase();
+    let response = "Sorry, I didn't understand that. Please ask another question.";
+    for (let pair of qaPairs) {
+      if (lowerQuestion.includes(pair.question.toLowerCase())) {
+        response = pair.answer;
+        break;
+      }
+    }
+
+    addMessage("Bot: " + response, 'bot');
+    userInput.value = "";
+  }
+
+  // Event listeners
+  sendBtn.onclick = handleUserInput;
+  userInput.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+      handleUserInput();
+    }
+  });
+</script>
+
+</body>
+</html>

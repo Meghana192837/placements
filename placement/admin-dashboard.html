@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+
+<style>
+body{margin:0;font-family:Arial;background:#f1f5f9}
+.container{display:flex;height:100vh}
+.sidebar{width:260px;background:#0f172a;color:white;padding:20px}
+.sidebar h2{color:#60a5fa}
+.sidebar a{display:block;color:#cbd5f5;text-decoration:none;margin:10px 0;cursor:pointer}
+.sidebar a:hover{color:#60a5fa}
+.submenu{margin-left:15px}
+.main{flex:1;padding:30px;overflow:auto}
+.card{background:white;padding:20px;border-radius:12px;box-shadow:0 5px 10px rgba(0,0,0,.1)}
+.btn{background:#3b82f6;color:white;border:none;padding:6px 12px;border-radius:6px;cursor:pointer}
+.btn:hover{background:#2563eb}
+table{width:100%;border-collapse:collapse;margin-top:10px}
+th,td{padding:8px;border-bottom:1px solid #e5e7eb}
+.video-box{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.video-box iframe{width:100%;height:260px;border-radius:10px;box-shadow:0 5px 10px rgba(0,0,0,.2)}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="sidebar">
+<h2>Admin Dashboard</h2>
+<a onclick="show('dashboard')">Dashboard</a>
+
+<a>Classes</a>
+<div class="submenu">
+<a onclick="show('aptitude')">Aptitude</a>
+<a onclick="show('reasoning')">Reasoning</a>
+<a onclick="show('english')">English</a>
+<a onclick="show('coding')">Coding</a>
+</div>
+
+<a onclick="show('materials')">Materials</a>
+<a onclick="show('exams')">Exams</a>
+<a onclick="show('results')">Results</a>
+<a onclick="show('shortlist')">Shortlist</a>
+<a onclick="show('opportunities')">Opportunities</a>
+</div>
+
+<div class="main">
+<div id="content" class="card"></div>
+</div>
+
+</div>
+
+<script>
+let students=[
+{ name:"Mahesh", a:20, r:18, e:17, c:19 },
+{ name:"Nikitha", a:18, r:19, e:16, c:17 },
+{ name:"Meghana", a:15, r:14, e:13, c:16 },
+{ name:"Swapna", a:12, r:13, e:11, c:14 },
+{ name:"Sita", a:10, r:11, e:12, c:9 }
+];
+
+let store={materials:[],exams:[],opportunities:[]};
+
+function show(page){
+    let c=document.getElementById("content");
+
+    if(page=="dashboard")
+        c.innerHTML=`<h2>Welcome Admin</h2>`;
+
+    if(page=="aptitude"){
+        c.innerHTML=`
+        <h2>Aptitude <button class="btn" onclick="addVideo('aptitude')">+</button></h2>
+        <div class="video-box" id="aptitudeBox">
+        <iframe src="https://www.youtube.com/embed/Fb0B_32dTYg" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/27hKBjXSnpk" allowfullscreen></iframe>
+        </div>`;
+    }
+
+    if(page=="reasoning"){
+        c.innerHTML=`
+        <h2>Reasoning <button class="btn" onclick="addVideo('reasoning')">+</button></h2>
+        <div class="video-box" id="reasoningBox">
+        <iframe src="https://www.youtube.com/embed/D1ZJyiQVqFs" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/ywT5Qeh1EPk" allowfullscreen></iframe>
+        </div>`;
+    }
+
+    if(page=="english"){
+        c.innerHTML=`
+        <h2>English <button class="btn" onclick="addVideo('english')">+</button></h2>
+        <div class="video-box" id="englishBox">
+        <iframe src="https://www.youtube.com/embed/OGz55u94tyw" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/bQoWe8vGM7I" allowfullscreen></iframe>
+        </div>`;
+    }
+
+    if(page=="coding"){
+        c.innerHTML=`
+        <h2>Coding <button class="btn" onclick="addVideo('coding')">+</button></h2>
+        <div class="video-box" id="codingBox">
+        <iframe src="https://www.youtube.com/embed/-C88r0niLQQ" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/mG4NLNZ37y4" allowfullscreen></iframe>
+        </div>`;
+    }
+
+    if(page=="materials"){
+        c.innerHTML=`<h2>Materials <button class="btn" onclick="addFile('materials')">+</button></h2><ul id="materialsList"></ul>`;
+        renderFiles("materials");
+    }
+
+    if(page=="exams"){
+        c.innerHTML=`<h2>Exams <button class="btn" onclick="addFile('exams')">+</button></h2><ul id="examsList"></ul>`;
+        renderFiles("exams");
+    }
+
+    if(page=="opportunities"){
+        c.innerHTML=`<h2>Opportunities <button class="btn" onclick="addFile('opportunities')">+</button></h2><ul id="opportunitiesList"></ul>`;
+        renderFiles("opportunities");
+    }
+
+    if(page=="results"){
+        students.forEach(s=>s.total=s.a+s.r+s.e+s.c);
+        students.sort((x,y)=>y.total-x.total);
+        let html=`<h2>Results</h2><table>
+        <tr><th>S.No</th><th>Name</th><th>Aptitude</th><th>Reasoning</th><th>English</th><th>Coding</th><th>Total</th><th>Rank</th></tr>`;
+        students.forEach((s,i)=>{
+            html+=`<tr><td>${i+1}</td><td>${s.name}</td><td>${s.a}</td><td>${s.r}</td><td>${s.e}</td><td>${s.c}</td><td>${s.total}</td><td>${i+1}</td></tr>`;
+        });
+        html+="</table>";
+        c.innerHTML=html;
+    }
+
+    if(page=="shortlist"){
+        students.forEach(s=>s.total=s.a+s.r+s.e+s.c);
+        students.sort((x,y)=>y.total-x.total);
+        let html=`<h2>Shortlisted <button class='btn' onclick='exportExcel()'>Download Excel</button></h2>`;
+        html+="<table><tr><th>Rank</th><th>Name</th><th>Total</th></tr>";
+        students.forEach((s,i)=>html+=`<tr><td>${i+1}</td><td>${s.name}</td><td>${s.total}</td></tr>`);
+        html+="</table>";
+        c.innerHTML=html;
+    }
+}
+
+function addVideo(section){
+    let link=prompt("Paste YouTube link:");
+    if(!link) return;
+    const embed=link.replace("watch?v=","embed/");
+    const box=document.getElementById(section+"Box");
+    box.innerHTML+=`<iframe src="${embed}" allowfullscreen></iframe>`;
+}
+
+function addFile(type){
+    const input=document.createElement("input");
+    input.type="file";
+    input.accept="application/pdf";
+    input.onchange=()=>{
+        const file=input.files[0];
+        const url=URL.createObjectURL(file);
+        store[type].push({name:file.name,url});
+        renderFiles(type);
+    };
+    input.click();
+}
+
+function renderFiles(type){
+    const list=document.getElementById(type+"List");
+    if(!list) return;
+    list.innerHTML="";
+    store[type].forEach(f=>{
+        list.innerHTML+=`<li><a href="${f.url}" target="_blank">${f.name}</a></li>`;
+    });
+}
+
+function exportExcel(){
+    let csv="Rank,Name,Total\n";
+    students.forEach((s,i)=>csv+=`${i+1},${s.name},${s.total}\n`);
+    const blob=new Blob([csv],{type:"text/csv"});
+    const a=document.createElement("a");
+    a.href=URL.createObjectURL(blob);
+    a.download="Shortlist.csv";
+    a.click();
+}
+
+show("dashboard");
+</script>
+
+</body>
+</html>

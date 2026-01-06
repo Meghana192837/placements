@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    /* Hover effects for sidebar items */
+    .sidebar-item:hover { background-color: #374151; transition: 0.3s; }
+    /* Styles for submenu items */
+    .submenu-item { padding-left: 3rem; font-size: 0.875rem; color: #9ca3af; cursor: pointer; }
+    .submenu-item:hover { color: white; }
+    /* Hidden sections toggle */
+    .hidden-section { display: none; }
+    /* Video card styles */
+    .video-card { border: 2px solid #ddd; padding: 15px; border-radius: 8px; background: white; margin-bottom: 20px; }
+    /* Video control buttons */
+    .video-controls button { padding: 5px 10px; border-radius: 4px; background: #e2e8f0; font-size: 12px; margin-right: 5px; }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <div class="flex min-h-screen">
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 bg-gray-900 text-white flex-shrink-0">
+      <!-- Dashboard Title -->
+      <div class="p-6 text-2xl font-bold border-b border-gray-800 text-blue-400">Student Dashboard</div>
+      
+      <!-- Navigation Menu -->
+      <nav class="mt-6">
+        <!-- Classes Section -->
+        <div>
+          <div class="flex items-center px-6 py-3 text-gray-300"><i class="fas fa-chalkboard-teacher mr-3"></i><span class="font-semibold">Classes</span></div>
+          <ul>
+            <li class="submenu-item py-2" onclick="showSection('reasoning')"><i class="fas fa-brain mr-2"></i> Reasoning</li>
+            <li class="submenu-item py-2" onclick="showSection('aptitude')"><i class="fas fa-calculator mr-2"></i> Aptitude</li>
+            <li class="submenu-item py-2" onclick="showSection('english')"><i class="fas fa-language mr-2"></i> English</li>
+            <li class="submenu-item py-2" onclick="showSection('coding')"><i class="fas fa-code mr-2"></i> Coding</li>
+          </ul>
+        </div>
+        <!-- Materials -->
+        <div class="sidebar-item px-6 py-3 cursor-pointer flex items-center" onclick="showSection('material')">
+          <i class="fas fa-book mr-3"></i><span>Materials</span>
+        </div>
+        <!-- Exam Section -->
+        <div>
+          <div class="flex items-center px-6 py-3 text-gray-300"><i class="fas fa-edit mr-3"></i><span class="font-semibold">Exam</span></div>
+          <ul>
+            <li class="submenu-item py-2" onclick="showSection('daily-exam')">Daily Exam</li>
+            <li class="submenu-item py-2" onclick="showSection('weekly-exam')">Weekly Exam</li>
+            <li class="submenu-item py-2" onclick="showSection('grand-test')">Grand Test</li>
+          </ul>
+        </div>
+        <!-- Results/Score -->
+        <div class="sidebar-item px-6 py-3 cursor-pointer flex items-center" onclick="showSection('results')">
+          <i class="fas fa-chart-bar mr-3"></i><span>Results/Score</span>
+        </div>
+        <!-- Applied Jobs / Internships -->
+        <div class="sidebar-item px-6 py-3 cursor-pointer flex items-center" onclick="showSection('applied')">
+          <i class="fas fa-briefcase mr-3"></i><span>Applied Jobs/Internships</span>
+        </div>
+        <!-- Opportunities -->
+        <div class="sidebar-item px-6 py-3 cursor-pointer flex items-center" onclick="showSection('available')">
+          <i class="fas fa-search mr-3"></i><span>Available Opportunities</span>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 p-8 overflow-y-auto">
+
+      <!-- Aptitude Classes -->
+      <section id="aptitude" class="section hidden-section">
+        <h2 class="text-2xl font-bold mb-4 text-blue-800">Aptitude Classes</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Video Card 1 -->
+          <div class="video-card">
+            <iframe class="w-full h-48 rounded" src="https://www.youtube.com/embed/Fb0B_32dTYg" frameborder="0" allowfullscreen></iframe>
+            <div class="video-controls mt-4 flex space-x-2">
+              <button onclick="alert('Settings Opened')"><i class="fas fa-cog"></i></button>
+              <button onclick="alert('Paused')"><i class="fas fa-pause"></i></button>
+              <button onclick="alert('Resumed')"><i class="fas fa-play"></i></button>
+              <button class="bg-blue-500 text-white" onclick="window.open('https://youtu.be/Fb0B_32dTYg')"><i class="fas fa-download"></i> Download</button>
+            </div>
+          </div>
+          <!-- Video Card 2 -->
+          <div class="video-card">
+            <iframe class="w-full h-48 rounded" src="https://www.youtube.com/embed/27hKBjXSnpk" frameborder="0" allowfullscreen></iframe>
+            <div class="video-controls mt-4 flex space-x-2">
+              <button><i class="fas fa-cog"></i></button>
+              <button><i class="fas fa-pause"></i></button>
+              <button><i class="fas fa-play"></i></button>
+              <button class="bg-blue-500 text-white" onclick="window.open('https://youtu.be/27hKBjXSnpk')"><i class="fas fa-download"></i> Download</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reasoning Classes -->
+      <section id="reasoning" class="section hidden-section">
+        <h2 class="text-2xl font-bold mb-4 text-orange-800">Reasoning Classes</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="video-card"><iframe class="w-full h-48 rounded" src="https://www.youtube.com/embed/D1ZJyiQVqFs"></iframe></div>
+          <div class="video-card"><iframe class="w-full h-48 rounded" src="https://www.youtube.com/embed/ywT5Qeh1EPk"></iframe></div>
+        </div>
+      </section>
+       <!-- Coding Classes -->
+      <section id="reasoning" class="section hidden-section">
+        <h2 class="text-2xl font-bold mb-4 text-orange-800">Reasoning Classes</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="video-card"><iframe class="w-full h-48 rounded" src="https://www.youtube.com/embed/D1ZJyiQVqFs"></iframe></div>
+          <div class="video-card"><iframe class="w-full h-48 rounded" src="https://www.youtube.com/embed/ywT5Qeh1EPk"></iframe></div>
+        </div>
+      </section> <!-- English Classes -->
+      <section id="reasoning" class="section hidden-section">
+        <h2 class="text-2xl font-bold mb-4 text-orange-800">Reasoning Classes</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="video-card"><iframe class="w-full h-48 rounded" src="https://www.youtube.com/embed/D1ZJyiQVqFs"></iframe></div>
+          <div class="video-card"><iframe class="w-full h-48 rounded" src="https://www.youtube.com/embed/ywT5Qeh1EPk"></iframe></div>
+        </div>
+      </section>
+
+      <!-- Daily Exam -->
+      <section id="daily-exam" class="section hidden-section">
+        <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-500">
+          <h2 class="text-2xl font-bold mb-4">Daily Mock Test</h2>
+          <form id="quizForm">
+            <!-- Question 1 -->
+            <p class="font-bold mb-2">1. Antonym of EPHEMERAL:</p>
+            <div class="ml-4 mb-4">
+              <label class="block"><input type="radio" name="q1" value="A"> A) Short-lived</label>
+              <label class="block"><input type="radio" name="q1" value="B"> B) Permanent</label>
+            </div>
+            <!-- Question 2 -->
+            <p class="font-bold mb-2">2. Which data structure is LIFO?</p>
+            <div class="ml-4 mb-4">
+              <label class="block"><input type="radio" name="q17" value="A"> A) Queue</label>
+              <label class="block"><input type="radio" name="q17" value="C"> C) Stack</label>
+            </div>
+            <!-- Submit Button -->
+            <button type="button" onclick="calculateScore()" class="bg-green-600 text-white px-6 py-2 rounded font-bold hover:bg-green-700">Finish & Show Results</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Results / Score -->
+      <section id="results" class="section hidden-section">
+        <h2 class="text-2xl font-bold mb-4">Exam Score Card</h2>
+        <div class="bg-white p-10 rounded-xl shadow-lg text-center">
+          <div class="text-6xl font-black text-blue-600" id="finalScoreDisplay">0 / 5</div>
+          <p class="text-gray-500 mt-2">Latest Exam Performance</p>
+        </div>
+      </section>
+
+      <!-- Download Materials -->
+      <section id="material" class="section hidden-section">
+        <h2 class="text-2xl font-bold mb-4">Download Study Material</h2>
+        <!-- Material 1 -->
+        <div class="bg-white p-4 rounded-lg shadow border flex justify-between items-center mb-2">
+          <span><i class="fas fa-file-pdf text-red-500 mr-2"></i> Reasoning - Logical Venn Diagrams</span>
+          <button class="bg-blue-600 text-white px-4 py-1 rounded">Download</button>
+        </div>
+        <!-- Material 2 -->
+        <div class="bg-white p-4 rounded-lg shadow border flex justify-between items-center">
+          <span><i class="fas fa-file-pdf text-red-500 mr-2"></i> Advanced Blood Relations - 1</span>
+          <button class="bg-blue-600 text-white px-4 py-1 rounded">Download</button>
+        </div>
+      </section>
+
+      <!-- Applied Jobs / Internship History -->
+      <section id="applied" class="section hidden-section">
+        <h2 class="text-2xl font-bold mb-4">Applied History</h2>
+        <ul class="space-y-3">
+          <li class="bg-white p-4 rounded shadow border-l-4 border-blue-500 font-bold">Google - Software Intern</li>
+          <li class="bg-white p-4 rounded shadow border-l-4 border-blue-500 font-bold">Microsoft - Python Developer</li>
+          <li class="bg-white p-4 rounded shadow border-l-4 border-blue-500 font-bold">Capgemini - Data Analyst</li>
+          <li class="bg-white p-4 rounded shadow border-l-4 border-blue-500 font-bold">Amazon - Fullstack Dev</li>
+          <li class="bg-white p-4 rounded shadow border-l-4 border-blue-500 font-bold">IBM - Junior Engineer</li>
+        </ul>
+      </section>
+
+      <!-- Opportunities Table -->
+      <section id="available" class="section">
+        <h2 class="text-2xl font-bold mb-4">New Opportunities</h2>
+        <table class="w-full bg-white rounded shadow text-left">
+          <thead class="bg-gray-200">
+            <tr><th class="p-3">Company</th><th class="p-3">Role</th><th class="p-3">Action</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="p-3">Microsoft</td><td class="p-3">Python Role / Java / Fullstack</td><td class="p-3"><button class="text-blue-600 font-bold">Apply</button></td></tr>
+            <tr><td class="p-3">Google</td><td class="p-3">Data Analyst / Fullstack</td><td class="p-3"><button class="text-blue-600 font-bold">Apply</button></td></tr>
+            <tr><td class="p-3">Capgemini</td><td class="p-3">Java Developer</td><td class="p-3"><button class="text-blue-600 font-bold">Apply</button></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Scripts for Section Navigation & Quiz Calculation -->
+  <script>
+    // Show selected section and hide others
+    function showSection(sectionId) {
+      document.querySelectorAll('.section').forEach(s => s.classList.add('hidden-section'));
+      document.getElementById(sectionId).classList.remove('hidden-section');
+    }
+
+    // Calculate quiz score and display results
+    function calculateScore() {
+      const q1 = document.querySelector('input[name="q1"]:checked')?.value;
+      const q17 = document.querySelector('input[name="q17"]:checked')?.value;
+      let score = 0;
+      if (q1 === 'B') score++;
+      if (q17 === 'C') score++;
+
+      // Display score
+      document.getElementById('finalScoreDisplay').innerText = score + " / 5";
+      alert('Test Submitted! Your score: ' + score + '/5');
+      showSection('results');
+    }
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Dashboard</title>
+</head>
+<body style="font-family:Montserrat;text-align:center;">
+  <h1>🎉 Welcome to Student Dashboard 🎉</h1>
+</body>
+</html>
